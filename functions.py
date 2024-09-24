@@ -3,11 +3,11 @@ import xml.etree.ElementTree as ET
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
-from statsmodels.stats.diagnostic import acorr_ljungbox
 from statsmodels.tsa.stattools import adfuller, kpss
 import scipy.stats as stats
 from scipy.signal import butter, filtfilt
-import matplotlib.pyplot as plt
+import warnings
+from statsmodels.tools.sm_exceptions import InterpolationWarning
 
 
 def rates_request():
@@ -39,6 +39,8 @@ def ADF_test(data):
 
 def KPSS_test(data):
     """Тест Квятковского-Филлипса-Шмидта-Шина, проверяет ряд на стационарность"""
+    warnings.simplefilter("ignore", InterpolationWarning)
+
     rates_series = pd.Series(data)
     # KPSS-тест
     kpss_result = kpss(rates_series, regression="c", nlags="auto")
