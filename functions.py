@@ -116,7 +116,7 @@ def Butterworth_filter(data):
     return filtered_series
 
 
-def exponential_moving_average(data, alpha=0.2):
+def EMA(data, alpha=0.2):
     """Алгоритм экспоненциального скользящего среднего, сглаживает значения ряда"""
     data = np.array(data)
     ema = np.zeros_like(data)
